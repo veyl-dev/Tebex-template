@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<section class="page-hero page-hero--compact"><div class="eyebrow"><span class="eyebrow__line"></span>PLAYER ACCOUNT</div><h1>Who are <em>you?</em></h1><p>Enter your in-game username to continue with your order.</p></section>
-<section class="username-panel"><div class="username-panel__icon">⌁</div><h2>Connect your player name</h2><p>Use the exact username associated with your game account.</p><form method="post" action=""><label for="username">Minecraft username</label><input id="username" name="username" type="text" autocomplete="username" required maxlength="32" placeholder="YourPlayerName"><button class="button button--primary button--wide" type="submit">Continue <span>↗</span></button></form></section>
+<section class="page-hero page-hero--compact"><div class="eyebrow"><span class="eyebrow__line"></span>PLAYER ACCOUNT</div><h1>Who are <em>you?</em></h1><p>Connect your game account to continue with your order.</p></section>
+<section class="username-panel"><div class="username-panel__icon">⌁</div>
+{% if external %}
+  <h2>Continue with {{ provider }}</h2><p>You'll be redirected to your selected login provider.</p><a class="button button--primary button--wide" href="{{ url }}">Continue to {{ provider }} <span>↗</span></a>
+{% else %}
+  <h2>Enter your player name</h2><p>Use the exact in-game username associated with your account.</p><form method="post"><label for="ign">In-game username</label><input id="ign" name="ign" type="text" autocomplete="username" required maxlength="32" placeholder="YourPlayerName"><button class="button button--primary button--wide" type="submit">Continue <span>↗</span></button></form>
+{% endif %}
+</section>
 {% endblock %}
