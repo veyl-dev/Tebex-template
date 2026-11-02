@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="page-hero page-hero--compact">
+  <div class="eyebrow"><span class="eyebrow__line"></span>PACKAGE CUSTOMIZATION</div>
+  <h1>Make it <em>yours.</em></h1>
+  <p>Choose the options required for {{ options.package.name }} before adding it to your basket.</p>
+</section>
+<section class="username-panel options-panel">
+  <div class="username-panel__icon">✧</div>
+  <h2>{{ options.package.name }}</h2>
+  <p>Complete the required package details below.</p>
+  <form method="post">
+    {% if options.package.customPrice %}
+      <label for="custom-price">Your price</label>
+      <input id="custom-price" name="price" type="number" min="0" step="0.01" required value="{{ options.package.price }}">
+    {% endif %}
+    {% for variable in options.variables %}
+      <div class="option-field">
+        <label for="option-{{ variable.id }}">{{ variable.description }}</label>
+        {% if variable.type == "dropdown" %}
+          <select id="option-{{ variable.id }}" name="variables[{{ variable.id }}]" required>
+            {% for choice in variable.options %}
+              <option value="{{ choice.name }}" {% if choice.default or choice.name == variable.value %}selected{% endif %}>
+                {{ choice.name }}{% if choice.price and choice.price != "0.00" %} (+{{ choice.price|money }}){% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        {% elseif variable.type == "discord_id" %}
+          <input id="option-{{ variable.id }}" name="variables[{{ variable.id }}]" type="text" value="{{ variable.value }}" placeholder="Discord username or ID" required>
+          {% if variable.discord_tag %}<small class="purchase-note">Connected Discord: {{ variable.discord_tag }}</small>{% endif %}
+        {% else %}
+          <input id="option-{{ variable.id }}" name="variables[{{ variable.id }}]" type="text" value="{{ variable.value }}" required>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% if options.package.chooseServer %}
+      <p class="purchase-note">This package also requires a game-server selection. Complete any server selection presented by Tebex during the checkout flow.</p>
+    {% endif %}
+    <button class="button button--primary button--wide" type="submit">Continue <span>↗</span></button>
+  </form>
+</section>
+{% endblock %}
