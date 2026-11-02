@@ -1,6 +1,6 @@
 {
   "author": "Universe404 Dev",
-  "support_email": "support@universe404.dev",
+  "support_email": "",
   "config": [
     {"header":"Brand & Identity","options":[
       {"id":"brand_tagline","name":"Store tagline","type":"textarea","default":"YOUR WORLD. YOUR LEGACY."},
