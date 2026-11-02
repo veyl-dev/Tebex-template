@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="page-hero page-hero--compact"><div class="eyebrow"><span class="eyebrow__line"></span>MEMBERSHIP UPDATE</div><h1>Confirm your <em>change.</em></h1></section>
+<main class="username-panel"><div class="eyebrow">REVIEW CHANGE</div><div class="package-description">{{ description|raw }}</div><form method="post" action="/tier/update"><input type="hidden" name="category_id" value="{{ category }}"><input type="hidden" name="package_id" value="{{ package }}">{% for k, v in options %}<input type="hidden" name="options[{{ k }}]" value="{{ v }}">{% endfor %}<div class="tier-actions"><a href="/category/{{ category }}" class="button button--ghost button--wide">{{ __('Back') }}</a><button type="submit" class="button button--primary button--wide">{{ __('Confirm') }} ↗</button></div></form></main>
+{% endblock %}
