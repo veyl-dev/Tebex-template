@@ -9,7 +9,7 @@
     <div class="purchase-panel">
       <div class="purchase-panel__price"><span>YOUR PRICE</span><strong>{% if customPrice %}Custom{% else %}{{ price|money }} {{ basket.currency }}{% endif %}</strong>{% if discount.applied %}<del>{{ discount.original|money }}</del>{% endif %}</div>
       {% if purchasable %}
-        {% if has_options %}<a class="button button--primary button--wide" href="/package/{{ identifier }}">Choose options <span>↗</span></a>
+        {% if has_options %}<a class="button button--primary button--wide" href="/checkout/packages/add/{{ identifier }}">Choose options <span>↗</span></a>
         {% else %}<a class="button button--primary button--wide" href="/checkout/packages/add/{{ identifier }}">Add to basket <span>＋</span></a>{% endif %}
       {% else %}<button class="button button--disabled button--wide" disabled>Unavailable</button>{% endif %}
       <small class="purchase-note">Secure checkout powered by Tebex. Delivery depends on your server's package configuration.</small>
