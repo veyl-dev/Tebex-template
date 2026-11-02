@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="page-hero page-hero--compact"><div class="eyebrow"><span class="eyebrow__line"></span>MEMBERSHIP LEVELS</div><h1>{{ category.name }}</h1>{% if category.description != "" %}<div class="page-description">{{ category.description|raw }}</div>{% endif %}</section>
+<section class="section section--top"><div class="package-grid">
+{% for package in category.packages %}
+  {% set packageIdentifier = package.identifier ? package.identifier : package.id %}
+  <article class="package-card {% if tier and tier.package_id == package.id %}is-current-tier{% endif %}">
+    <div class="package-card__image">{% if package.image.url %}<img src="{{ package.image.url }}" alt="{{ package.name }}">{% else %}<span class="package-placeholder">✧</span>{% endif %}</div>
+    <div class="package-card__body"><div class="package-card__top"><span>MEMBERSHIP</span>{% if tier and tier.package_id == package.id %}<span>ACTIVE</span>{% endif %}</div><h3>{{ package.name }}</h3><div class="package-description">{{ package.description|raw }}</div>
+      <div class="price"><strong>{% if package.customPrice %}{{ __('Custom price') }}{% elseif package.price == 0.00 %}{{ __('Free') }}{% else %}{{ package.price|money }} {{ basket.currency }}{% endif %}</strong></div>
+      <div class="tier-actions">
+      {% if tier and tier.package_id == package.id %}<button class="button button--disabled button--wide" disabled>{{ __('Subscribed') }}</button>
+      {% elseif tier and tier.downgrade_package_id == package.id %}<button class="button button--disabled button--wide" disabled>{{ __('Pending downgrade') }}</button>
+      {% elseif tier %}<a class="button button--primary button--wide" href="/tier/quote?category={{ category.id }}&amp;package={{ package.id }}">{{ __('Change membership') }} ↗</a>
+      {% else %}<a class="button button--primary button--wide" href="/checkout/packages/add/{{ packageIdentifier }}/subscribe">{{ __('Subscribe') }} ↗</a>{% endif %}
+      </div>
+    </div>
+  </article>
+{% endfor %}
+</div></section>
+{% endblock %}
