@@ -1,10 +1,14 @@
-name: Validate Tebex Theme
+name: Validate and Package ECLIPSE
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -16,5 +20,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate theme files
+      - name: Validate theme
         run: node scripts/validate.mjs
+      - name: Build distributable ZIP
+        run: |
+          mkdir -p dist/ECLIPSE-Tebex-Template
+          cp -R Webstore Assets schema.json README.md LICENSE preview dist/ECLIPSE-Tebex-Template/
+          cd dist
+          zip -qr ECLIPSE-Tebex-Template-v1.0.0.zip ECLIPSE-Tebex-Template
+      - name: Upload release package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ECLIPSE-Tebex-Template-v1.0.0
+          path: dist/ECLIPSE-Tebex-Template-v1.0.0.zip
+          if-no-files-found: error
+          retention-days: 30
