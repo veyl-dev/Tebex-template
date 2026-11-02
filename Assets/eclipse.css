@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 .tier-actions{display:grid;gap:9px;margin-top:18px}.is-current-tier{border-color:rgba(139,255,176,.42)}
+
+.option-field{margin:18px 0;text-align:left}.option-field label{display:block;margin-bottom:8px;font-size:10px}.option-field input,.option-field select{width:100%;min-height:45px;padding:0 12px;border:1px solid var(--line);background:#080d0b;color:var(--eclipse-text);outline:none}.option-field input:focus,.option-field select:focus{border-color:var(--eclipse-accent)}.options-panel form{text-align:left}
