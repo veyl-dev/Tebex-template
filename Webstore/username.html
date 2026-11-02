@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="page-hero page-hero--compact"><div class="eyebrow"><span class="eyebrow__line"></span>PLAYER ACCOUNT</div><h1>Who are <em>you?</em></h1><p>Enter your in-game username to continue with your order.</p></section>
+<section class="username-panel"><div class="username-panel__icon">⌁</div><h2>Connect your player name</h2><p>Use the exact username associated with your game account.</p><form method="post" action=""><label for="username">Minecraft username</label><input id="username" name="username" type="text" autocomplete="username" required maxlength="32" placeholder="YourPlayerName"><button class="button button--primary button--wide" type="submit">Continue <span>↗</span></button></form></section>
+{% endblock %}
