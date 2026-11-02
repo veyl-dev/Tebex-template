@@ -26,12 +26,6 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run responsive browser smoke tests
         run: node scripts/smoke.mjs
-      - name: Install browser test dependency
-        run: npm install --no-save playwright
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-      - name: Run responsive browser smoke tests
-        run: node scripts/smoke.mjs
       - name: Build BuiltByBit distribution ZIP
         run: |
           mkdir -p dist/ECLIPSE-Tebex-Template
