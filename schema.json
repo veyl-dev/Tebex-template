@@ -1,0 +1,30 @@
+{
+  "author": "Universe404 Dev",
+  "support_email": "support@universe404.dev",
+  "config": [
+    {"header":"Brand & Identity","options":[
+      {"id":"brand_tagline","name":"Store tagline","type":"textarea","default":"YOUR WORLD. YOUR LEGACY."},
+      {"id":"hero_eyebrow","name":"Hero eyebrow","type":"textarea","default":"THE OFFICIAL COMMUNITY STORE"},
+      {"id":"hero_title","name":"Hero headline","type":"textarea","default":"Build your legacy."},
+      {"id":"hero_text","name":"Hero description","type":"textarea","default":"Unlock new ways to play, stand out across the network, and make every adventure count."},
+      {"id":"hero_button","name":"Hero button label","type":"textarea","default":"Explore packages"}
+    ]},
+    {"header":"Colours","options":[
+      {"id":"accent_color","name":"Accent colour","type":"colour-picker","default":"#8BFFB0"},
+      {"id":"background_color","name":"Background colour","type":"colour-picker","default":"#080D0B"},
+      {"id":"surface_color","name":"Card surface colour","type":"colour-picker","default":"#111A15"},
+      {"id":"text_color","name":"Main text colour","type":"colour-picker","default":"#F2F7F3"}
+    ]},
+    {"header":"Community","options":[
+      {"id":"server_address","name":"Minecraft server address","type":"textarea","default":"play.example.net"},
+      {"id":"discord_url","name":"Discord invite URL","type":"url","default":""},
+      {"id":"community_note","name":"Community note","type":"textarea","default":"Join the community and play with us."}
+    ]},
+    {"header":"Display","options":[
+      {"id":"show_announcement","name":"Show announcement bar","type":"select","default":"Yes","values":["Yes","No"]},
+      {"id":"announcement_text","name":"Announcement text","type":"textarea","default":"A NEW SEASON STARTS NOW — EXPLORE THE STORE."},
+      {"id":"show_feature_cards","name":"Show homepage feature cards","type":"select","default":"Yes","values":["Yes","No"]},
+      {"id":"footer_note","name":"Footer note","type":"textarea","default":"Thanks for supporting our community."}
+    ]}
+  ]
+}
