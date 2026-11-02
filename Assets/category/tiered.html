@@ -13,8 +13,10 @@
       <div class="tier-actions">
       {% if tier and tier.package_id == package.id %}<button class="button button--disabled button--wide" disabled>{{ __('Subscribed') }}</button>
       {% elseif tier and tier.downgrade_package_id == package.id %}<button class="button button--disabled button--wide" disabled>{{ __('Pending downgrade') }}</button>
-      {% elseif tier %}<a class="button button--primary button--wide" href="/tier/quote?category={{ category.id }}&amp;package={{ package.id }}" {% if package.purchasable == false %}aria-disabled="true"{% endif %}>{{ __('Change membership') }} ↗</a>
-      {% else %}<a class="button button--primary button--wide" href="/checkout/packages/add/{{ packageIdentifier }}/subscribe" {% if package.purchasable == false %}aria-disabled="true"{% endif %}>{{ __('Subscribe') }} ↗</a>{% endif %}
+      {% elseif tier and package.purchasable %}<a class="button button--primary button--wide" href="/tier/quote?category={{ category.id }}&amp;package={{ package.id }}">{{ __('Change membership') }} ↗</a>
+      {% elseif tier %}<button class="button button--disabled button--wide" disabled>{{ __('Unavailable') }}</button>
+      {% elseif package.purchasable %}<a class="button button--primary button--wide" href="/checkout/packages/add/{{ packageIdentifier }}/subscribe">{{ __('Subscribe') }} ↗</a>
+      {% else %}<button class="button button--disabled button--wide" disabled>{{ __('Unavailable') }}</button>{% endif %}
       {% if package.basket %}<button class="button button--ghost button--wide" disabled>{{ __('Added to basket') }}</button>{% endif %}
       </div>
     </div>
