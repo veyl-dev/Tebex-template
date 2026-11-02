@@ -11,27 +11,38 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  validate-and-package:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate theme
+      - name: Validate template and schema
         run: node scripts/validate.mjs
-      - name: Build distributable ZIP
+      - name: Install browser test dependency
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run responsive browser smoke tests
+        run: node scripts/smoke.mjs
+      - name: Build BuiltByBit distribution ZIP
         run: |
           mkdir -p dist/ECLIPSE-Tebex-Template
           cp -R Webstore Assets schema.json README.md LICENSE preview dist/ECLIPSE-Tebex-Template/
           cd dist
           zip -qr ECLIPSE-Tebex-Template-v1.0.0.zip ECLIPSE-Tebex-Template
-      - name: Upload release package
+      - name: Upload release ZIP
         uses: actions/upload-artifact@v4
         with:
           name: ECLIPSE-Tebex-Template-v1.0.0
           path: dist/ECLIPSE-Tebex-Template-v1.0.0.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload responsive preview screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: ECLIPSE-QA-Screenshots
+          path: artifacts/*.png
           if-no-files-found: error
           retention-days: 30
