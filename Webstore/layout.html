@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="{{ config('background_color')|default('#080D0B') }}">
+<title>{% if page.title is defined %}{{ page.title }} · {% endif %}{{ store.name }}</title>
+<meta name="description" content="{{ config('brand_tagline')|default(store.name) }}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('eclipse.css') }}">
+<style>:root{--eclipse-accent:{{ config('accent_color')|default('#8BFFB0') }};--eclipse-bg:{{ config('background_color')|default('#080D0B') }};--eclipse-surface:{{ config('surface_color')|default('#111A15') }};--eclipse-text:{{ config('text_color')|default('#F2F7F3') }};}</style>
+{{ store.css|raw }}
+{% block head %}{% endblock %}
+</head>
+<body><div class="site-shell">
+{% if config('show_announcement')|default('Yes') == 'Yes' %}<div class="announcement"><span class="announcement__dot"></span>{{ config('announcement_text')|default('Welcome to our community store.') }}</div>{% endif %}
+<header class="site-header">
+<a class="brand" href="/" aria-label="{{ store.name }}">{% if store.logo %}<img class="brand__logo" src="{{ store.logo }}" alt="{{ store.name }}">{% endif %}<span class="brand__copy"><strong>{{ store.name }}</strong><small>{{ config('brand_tagline')|default('OFFICIAL COMMUNITY STORE') }}</small></span></a>
+<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle><span></span><span></span></button>
+<nav class="main-nav" data-main-nav aria-label="Main navigation"><a href="/">Home</a>{% for nav_category in store.categories %}<a href="/category/{{ nav_category.slug }}">{{ nav_category.name }}</a>{% endfor %}{% if config('discord_url') %}<a href="{{ config('discord_url') }}" target="_blank" rel="noopener">Community ↗</a>{% endif %}</nav>
+<div class="header-actions"><a class="basket-link" href="/checkout"><span class="basket-link__icon">▣</span><span>Basket</span>{% if basket.packages|length > 0 %}<b class="basket-count">{{ basket.packages|length }}</b>{% endif %}</a></div>
+</header>
+{% if store.userMessage %}<div class="notice notice--system">{{ store.userMessage }}</div>{% endif %}
+<main id="main-content" class="main-content">{% block content %}{% endblock %}</main>
+<footer class="site-footer"><div class="footer-top"><div class="footer-brand"><span class="footer-mark">U<span>404</span></span><div><strong>{{ store.name }}</strong><p>{{ config('footer_note')|default('Thanks for being part of the community.') }}</p></div></div><div class="footer-links"><a href="/">Store</a>{% if config('discord_url') %}<a href="{{ config('discord_url') }}" target="_blank" rel="noopener">Discord ↗</a>{% endif %}{% for page_link in store.pages %}<a href="{{ page_link.url }}">{{ page_link.name }}</a>{% endfor %}</div></div><div class="footer-bottom"><span>© {{ "now"|date("Y") }} {{ store.name }}. All rights reserved.</span><span>Powered by Tebex</span></div></footer>
+</div><script defer src="{{ asset('eclipse.js') }}"></script>{% block scripts %}{% endblock %}</body></html>
